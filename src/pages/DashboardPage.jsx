@@ -8,7 +8,7 @@ import {
   CardDescription,
 } from "@/components/ui/card.jsx";
 import { LandPlot, MapPin } from "lucide-react";
-import { AddFarmDialog } from "@/components/add-farm-dialog.jsx";
+import  Addfarm from "./Addfarm";
 
 export default function DashboardPage() {
   const [farms, setFarms] = useState([]);
@@ -41,6 +41,8 @@ export default function DashboardPage() {
     } catch (error) {
       console.log(error)
       alert("Server Unreachable")
+      localStorage.removeItem("token")
+      nav('/')
     }
   }
 
@@ -73,7 +75,7 @@ export default function DashboardPage() {
         </h1>
 
         <div className="ml-auto flex items-center gap-2">
-          <AddFarmDialog onFarmAdded={loadFarms} />
+          <Addfarm onFarmAdded={loadFarms} />
         </div>
       </div>
 
@@ -83,7 +85,7 @@ export default function DashboardPage() {
 
           {farms.map((farm) => (
 
-            <Link to={`/dashboard/farm/${farm.id}`} key={farm._id}>
+            <Link to={`/dashboard/farm/${farm._id}`} key={farm._id}>
 
               <Card className="bg-gray-900 border-gray-800 hover:shadow-xl hover:bg-gray-800 transition-all duration-300 h-full flex flex-col">
 
@@ -130,7 +132,7 @@ export default function DashboardPage() {
             </p>
 
             <div className="mt-4">
-              <AddFarmDialog onFarmAdded={loadFarms} />
+              <Addfarm onFarmAdded={loadFarms} />
             </div>
 
           </div>

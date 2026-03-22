@@ -44,11 +44,24 @@ export async function getFarms() {
   return farms;
 }
 
-export async function getFarmById(id) {
-  // Simulate network delay
-  await new Promise((resolve) => setTimeout(resolve, 500));
-  return farms.find((farm) => farm.id === id);
-}
+export const getFarmById = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:5000/farm/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "id": localStorage.getItem("farmerId"), // 👈 important (auth)
+      },
+    });
+
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.error("API Error:", error);
+    return null;
+  }
+};
 
 export async function addFarm(farmData) {
   // Simulate network delay

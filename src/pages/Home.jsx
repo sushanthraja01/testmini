@@ -5,20 +5,7 @@ import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import TextType from "../components/rb/TextType";
 
-const Home = () => {
-
-  const [sl,setSl] = useState(false);
-  const [sr,setSr] = useState(false);
-
-  const fsl = () => {
-    setSr(false);
-    setSl(true);
-  }
-
-  const fsr = () => {
-    setSl(false);
-    setSr(true);
-  }
+const Home = ({sl,sr,fsl,fsr,setSl,setSr}) => {
 
   return (
     <div className="relative h-screen w-full overflow-hidden">

@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "@/components/logo.jsx";
 import { UserNav } from "@/components/user-nav.jsx";
 
 export default function Navbar({ fsl,fsr }) {
-
+  
+  const nav = useNavigate();
   const l = localStorage.getItem("token")
 
   return (
@@ -36,15 +37,15 @@ export default function Navbar({ fsl,fsr }) {
             <div className="ml-auto flex gap-4">
 
               <button
-                onClick={()=>fsl()}
-                className="px-4 py-2 border border-green-400 text-green-400 rounded-lg hover:bg-green-400 hover:text-black transition"
+                onClick={()=>nav('/login')}
+                className="cursor-pointer px-4 py-2 border border-green-400 text-green-400 rounded-lg hover:bg-green-400 hover:text-black transition"
               >
                 Login
               </button>
 
               <button
-                onClick={()=>fsr()}
-                className="px-4 py-2 bg-green-500 text-black rounded-lg hover:bg-green-400 transition"
+                onClick={()=>nav('/register')}
+                className="cursor-pointer px-4 py-2 bg-green-500 text-black rounded-lg hover:bg-green-400 transition"
               >
                 Register
               </button>

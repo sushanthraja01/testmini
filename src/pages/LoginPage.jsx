@@ -54,7 +54,7 @@ export default function LoginPage({setSl}) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-transparent px-4" onMouseDown={()=>setSl(false)}>
+    <div className="min-h-screen flex items-center justify-center bg-transparent px-4" onMouseDown={()=>{navigate('/');}}>
 
       <Card className="w-full max-w-sm backdrop-blur bg-black/40 border-gray-800 text-gray-200 shadow-xl rounded-xl" onMouseDown={(e)=>e.stopPropagation()}>
 
@@ -108,7 +108,7 @@ export default function LoginPage({setSl}) {
 
             <Button
               type="submit"
-              className="w-full bg-green-500 hover:bg-green-600 text-white"
+              className="cursor-pointer w-full bg-green-500 hover:bg-green-600 text-white"
             >
               Login
             </Button>

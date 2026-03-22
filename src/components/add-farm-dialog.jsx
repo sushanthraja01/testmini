@@ -21,6 +21,7 @@ export function AddFarmDialog({ onFarmAdded }) {
   const { toast } = useToast();
   const formRef = useRef(null);
   const closeButtonRef = useRef(null);
+  const [nit,setNit] = useState(250);
 
   const [pending, setPending] = useState(false);
   const [errors, setErrors] = useState({});
@@ -125,6 +126,35 @@ export function AddFarmDialog({ onFarmAdded }) {
               </p>
             )}
           </div>
+
+
+          <div className="grid grid-cols-5 items-center gap-4">
+            <Label htmlFor="name" className="text-right text-gray-300">
+              Nitrogen (Kg/ha)
+            </Label>
+
+            <Input
+        id="nitrogen"
+        type="range"
+        min="0"
+        max="700"
+        value={nit}
+        onChange={(e) => setNit(e.target.value)}
+        className="col-span-3 bg-gray-800 border-gray-700"
+      />
+
+
+          <Input type="textbox" value={nit} onChange={(e)=>setNit(e.target.value)} />
+
+            <div className="w-12 text-center bg-gray-700 text-white rounded-md py-1">
+        {nit}
+      </div>
+
+
+
+          </div>
+
+
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="location" className="text-right text-gray-300">
