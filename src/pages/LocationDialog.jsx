@@ -13,6 +13,7 @@ import {
 import { useState, useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { toast } from "react-toastify";
 
 // 🔥 FIX MARKER ICON ISSUE
 delete L.Icon.Default.prototype._getIconUrl;
@@ -85,7 +86,7 @@ const LocationDialog = ({ open, setOpen, loc, setLoc }) => {
     const data = await res.json();
 
     if (data.length === 0) {
-      alert("Location not found");
+      toast.warning("Location not found");
       return;
     }
 

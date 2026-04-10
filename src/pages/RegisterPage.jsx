@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input.jsx";
 import { Label } from "@/components/ui/label.jsx";
 import { Logo } from "@/components/logo.jsx";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function RegisterPage({setSr}) {
   const navigate = useNavigate();
@@ -37,16 +38,24 @@ export default function RegisterPage({setSr}) {
       const response = await res.json();
 
       if (res.ok) {
-        alert(response.mssg);
-        navigate("/login");
+        if (response.status === "success") {
+          toast.success(response.mssg);
+          navigate("/login");
+        } else {
+          toast.error(response.mssg);
+        }
         setName("");
         setEmail("");
         setPass("");
       }
     } catch (error) {
       console.log(error);
-      alert("Server not reachable");
+      toast.error("Server not reachable");
     }
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href = `${url}/auth/google`;
   };
 
   return (
@@ -134,6 +143,7 @@ export default function RegisterPage({setSr}) {
             {/* Google Sign In */}
             <Button
               type="button"
+              onClick={handleGoogleLogin}
               className="w-full flex items-center justify-center gap-2 bg-white text-black hover:bg-gray-200"
             >
               <svg

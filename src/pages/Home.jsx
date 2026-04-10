@@ -32,11 +32,9 @@ const Home = ({sl,sr,fsl,fsr,setSl,setSr}) => {
       {!sl && !sr && (
         <TextType
           text={[
-            "Welcome to Sushanth`s  Site",
             "Smart Crop Prediction for Better Farming",
             "Predict Yield in kg per Hectare with AI",
             "Analyze Post-Harvest NPK for Healthy Soil",
-            "AI-Powered Crop Prediction",
             "Accurate Yield Prediction (kg/hectare)", 
             "Soil Intelligence with Post-Harvest NPK Analysis"
           ]}

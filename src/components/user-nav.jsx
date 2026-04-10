@@ -12,13 +12,25 @@ import {
 } from "@/components/ui/dropdown-menu.jsx";
 import { LogOut, User } from "lucide-react";
 
-export function UserNav() {
+export function UserNav({ name, email }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userEmail");
     navigate("/");
   };
+
+  // Get initials for avatar fallback
+  const initials = name
+    ? name
+        .split(" ")
+        .map((w) => w[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2)
+    : "U";
 
   return (
     <DropdownMenu>
@@ -29,11 +41,11 @@ export function UserNav() {
         >
           <Avatar className="h-9 w-9">
             <AvatarImage
-              src="https://picsum.photos/seed/user/40/40"
-              alt="User"
+              src={`https://ui-avatars.com/api/?name=${encodeURIComponent(name || "User")}&background=22c55e&color=fff&size=40`}
+              alt={name || "User"}
             />
             <AvatarFallback className="bg-green-500 text-white">
-              <User size={18} />
+              {initials}
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -46,9 +58,9 @@ export function UserNav() {
       >
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium text-white">Farmer John</p>
+            <p className="text-sm font-medium text-white">{name || "User"}</p>
             <p className="text-xs text-gray-400">
-              farmer.john@example.com
+              {email || "No email"}
             </p>
           </div>
         </DropdownMenuLabel>

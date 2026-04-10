@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { PlusCircle } from "lucide-react";
 import LocationDialog from "./LocationDialog";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Addfarm = ({ onFarmAdded }) => {
 
@@ -63,7 +64,7 @@ const Addfarm = ({ onFarmAdded }) => {
       const t = localStorage.getItem("token");
 
       if (!t) {
-        alert("Please Login first");
+        toast.error("Please Login first");
         nav('/');
         return;
       }
@@ -89,7 +90,7 @@ const Addfarm = ({ onFarmAdded }) => {
       const res = await response.json();
 
       if (response.ok) {
-        alert(res.mssg);
+        toast.success(res.mssg);
 
         // ✅ Close dialog
         setOpen(false);
@@ -104,12 +105,12 @@ const Addfarm = ({ onFarmAdded }) => {
         }
 
       } else {
-        alert(res.mssg);
+        toast.error(res.mssg);
       }
 
     } catch (error) {
       console.log(error);
-      alert("Internal Server Error");
+      toast.error("Internal Server Error");
     }
   };
 

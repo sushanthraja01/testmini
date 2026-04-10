@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input.jsx";
 import { Label } from "@/components/ui/label.jsx";
 import { Logo } from "@/components/logo.jsx";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function LoginPage({setSl}) {
   const navigate = useNavigate();
@@ -35,22 +36,28 @@ export default function LoginPage({setSl}) {
 
       if (res.ok) {
         if (response.mssg === "Login Success") {
-          alert(response.mssg);
+          toast.success(response.mssg);
           localStorage.setItem("token", response.token);
+          localStorage.setItem("userName", response.name);
+          localStorage.setItem("userEmail", response.email);
           navigate("/dashboard");
         } else {
-          alert(response.mssg);
+          toast.error(response.mssg);
         }
       } else {
-        alert("Internal Server Error");
+        toast.error("Internal Server Error");
       }
 
       setEmail("");
       setPass("");
     } catch (error) {
       console.log(error);
-      alert("Server not reachable");
+      toast.error("Server not reachable");
     }
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href = `${url}/auth/google`;
   };
 
   return (
@@ -121,6 +128,7 @@ export default function LoginPage({setSl}) {
 
             <Button
               type="button"
+              onClick={handleGoogleLogin}
               className="w-full flex items-center justify-center gap-2 bg-white text-black hover:bg-gray-200"
             >
               <svg
